@@ -1,11 +1,20 @@
-void main() {
-  fetchData();
-  print('menunggu data');
+Future<void> main() async {
+  print(await printData());
+  print('data telah selesai diproses');
 }
 
-Future<void> fetchData() {
+Future<String> printData() async {
+  try {
+    var data = await fetchData();
+    return 'data: $data';
+  } catch (err) {
+    throw err;
+  }
+}
+
+Future<String> fetchData() {
   return Future.delayed(
     Duration(seconds: 2),
-    () => print('fetch data'),
+    () => 'data gagal diproses',
   );
 }
